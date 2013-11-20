@@ -1,0 +1,79 @@
+# Copyright 2013 John Kallimanis
+# Distributed under the terms of the GNU General Public License v2
+
+require gtk-icon-cache
+
+SUMMARY="Lyx is a WYSIWYM document processor"
+DESCRIPTION=" 
+        LyX is a document processor that encourages an approach to
+    writing based on the structure of your documents, not their
+    appearance. It is released under a Free Software / Open Source
+    license.
+
+    LyX is for people that write and want their writing to look great,
+    right out of the box. No more endless tinkering with formatting
+    details, 'finger painting' font attributes or futzing around with
+    page boundaries. You just write. In the background, Prof. Knuth's
+    legendary TeX typesetting engine makes you look good.
+
+    On screen, LyX looks like any word processor; its printed output
+    -- or richly cross-referenced PDF, just as readily produced --
+    looks like nothing else. Gone are the days of industrially bland
+    .docs, all looking similarly not-quite-right, yet coming out
+    unpredictably different on different printer drivers. Gone are the
+    crashes 'eating' your dissertation the evening before going to
+    press.
+
+    LyX is stable and fully featured. It is a multi-platform, fully
+    internationalized application 
+"
+
+HOMEPAGE="http://www.lyx.org/"
+DOWNLOADS="ftp://ftp.lyx.org/pub$/${PN}/stable/$(ever range 1-2).x/${PNV}.tar.xz"
+LICENCES="GPL-2"
+SLOT="0"
+
+MYOPTIONS="
+aspell [[ description = [ Enable spell-checking with the aspell library ] ]]
+enchant [[ description = [ Enable spell-checking with the enchant library ] ]]
+hunspell [[ description = [ Enable spell-checking with the hunspell library ] ]]
+    linguas:
+    af ak am ar as ast az be bg bn bo br bs ca cs
+    cy da de el en en_CA en_GB en_US eo es et eu fa fi fil fr
+    ga gd gl gu he hi hr hu hy ia id is it ja ka kk kn ko ky
+    la lb lo lt lv mk ml mn mr ms mt nan nb nl nn oc pa pl pt pt_BR ro
+    ru sco se si sk sl sq sr sv sw ta te tg th tl tr tt uk uz vi zh
+    zh_CN zh_HK zh_TW zu
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-lang/python:2.7
+        dev-texlive/texlive-latex
+        x11-libs/qt:4
+        aspell? (
+            app-spell/aspell
+        )
+        enchant? (
+            app-spell/enchant
+        )
+        hunspell? (
+            app-spell/hunspell
+        )
+"
+
+BUGS_TO="johnkall007@gmail.com"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=('--enable-nls')
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( "aspell" "hunspell" "enchant" )
+
+export_exlib_phases src_install
+
+lyx_src_install(){
+    default
+    insinto /usr/share/applications
+    doins "${FILES}"/lyx.desktop
+    insinto /usr/share/pixmaps/
+    doins "${FILES}"/lyx_logo_vert.png
+}
+
