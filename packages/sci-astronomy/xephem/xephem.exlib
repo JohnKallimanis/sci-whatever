@@ -72,8 +72,10 @@ xephem_src_install() {
 }
 
 xephem_pkg_postinst(){
-    elog "Extra catalog files have been installed. If you want to load them, go to Data -> Files... menu on a running instance of the programme and load the extra"
-    elog "catalogs you need from Files menu on the new window"
-    elog "In order to view the installed help file configure xephem to use your prefered html browser via Help -> Configure Help... menu item."
+    elog "Extra catalog files have been installed. If you want to load them, "
+    elog "go to Data -> Files... menu on a running instance of the programme "
+    elog "and load the extra catalogs you need from Files menu on the new window. "
+    elog "In order to view the installed help file configure xephem to use "
+    elog "your prefered html browser via Help -> Configure Help... menu item."
 }
 
